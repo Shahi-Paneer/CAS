@@ -10,6 +10,8 @@ void removeSpaces(string &s);
 
 void splitEquation(string &s);
 
+int sumSide(string side);
+
 int main()
 {
 
@@ -53,24 +55,37 @@ int main()
          << LHS << endl
          << RHS;
 
-    istringstream iss(LHS);
+    int LeftSum = sumSide(LHS);
+    int RightSum = sumSide(RHS);
+
+    RightSum = RightSum - LeftSum;
+    //(x_location ? RHS : LHS) += sum;
+
+    cout << endl << "Solution: X = " << RightSum << endl;
+}
+
+int sumSide(string side)
+{
+
+    istringstream iss(side);
 
     char sign;
     int number, sum = 0;
 
-    while (iss >> sign) {
-        if (isdigit(sign)) {
+    while (iss >> sign)
+    {
+        if (isdigit(sign))
+        {
             iss.putback(sign);
-            if (iss >> number) {
+            if (iss >> number)
+            {
                 sum += number;
             }
         }
     }
 
-    (x_location ? RHS : LHS) += sum;
-
-    cout << "Sum of the numbers: " << sum << endl;
-}
+    return sum;
+};
 
 void removeSpaces(string &s)
 {
