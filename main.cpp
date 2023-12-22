@@ -15,7 +15,7 @@ int sumSide(string side);
 int main()
 {
 
-    string eq = "x + 2 = 7";
+    string eq = "x + 2 = x -7 -1";
     removeSpaces(eq);
 
     cout << eq;
@@ -70,18 +70,26 @@ int sumSide(string side)
     istringstream iss(side);
 
     char sign;
+
+    char prevChar = '\0';
     int number, sum = 0;
 
     while (iss >> sign)
     {
         if (isdigit(sign))
         {
+             
             iss.putback(sign);
+            cout << endl << "lol " << sign << endl;
             if (iss >> number)
             {
+                if (prevChar == '-') {
+                  number *= -1;
+                }
                 sum += number;
             }
         }
+        prevChar = sign;
     }
 
     return sum;
